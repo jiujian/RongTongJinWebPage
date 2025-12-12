@@ -1,0 +1,43 @@
+name: Build EXE
+
+on:
+  push:
+    tags:
+      - 'v*'   # Trigger on version tags
+
+permissions:
+  contents: write   # Required to create releases and upload assets
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyinstaller -i https://pypi.tuna.tsinghua.edu.cn/simple
+          pip install pywebview -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+      - name: Build EXE
+        run: pyinstaller stock_viewer.py --onefile --name="StockViewer" --windowed
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: exe-output
+          path: dist/*.exe
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
