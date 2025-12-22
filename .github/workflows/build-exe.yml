@@ -27,7 +27,7 @@ jobs:
           pip install pywebview -i https://pypi.tuna.tsinghua.edu.cn/simple
 
       - name: Build EXE
-        run: pyinstaller stock_viewer.py --onefile --name="StockViewer" --windowed
+        run: pyinstaller stock_viewer.py --onefile --name="StockViewer" --windowed --icon=favicon.ico
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
