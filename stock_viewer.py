@@ -225,6 +225,23 @@ class StockViewer:
                 display: none !important;
             }}
             
+            /* 隐藏指定的DIV元素 */
+            .quote-page-header {{
+                display: none !important;
+            }}
+            .quote-divider.el-divider.el-divider--horizontal {{
+                display: none !important;
+            }}
+            .download-section {{
+                display: none !important;
+            }}
+            .page-memo {{
+                display: none !important;
+            }}
+            .footer-wrap {{
+                display: none !important;
+            }}
+            
             /* 确保内容区域可滚动（如果需要） */
             .main-content {{
                 height: 100vh;
